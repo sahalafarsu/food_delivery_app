@@ -4,7 +4,9 @@
 from django.contrib import admin
 # from django.contrib.admin import ModelAdmin
 
-from .models import Restaurant,Dish
+from .models import Restaurant, Dish, Special
+
+
 # Register your models here.
 class RestaurantAdmin(admin.ModelAdmin):
     list_display = ['name','slug']
@@ -17,3 +19,5 @@ class DishAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
     list_per_page = 20
 admin.site.register(Dish,DishAdmin)
+
+admin.site.register(Special)

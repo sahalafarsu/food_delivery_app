@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+
+{% if user.customer.membership == True %}
+    <a class="btn btn-primary ml-lg-3" href="{% url 'subscription_app:premium' %}">Premium</a>
+{% else %}
+    <a class="btn btn-primary ml-lg-3" href="{% url 'subscription_app:join' %}">subscribe</a>
+{% endif %}
+
+{% endif %}

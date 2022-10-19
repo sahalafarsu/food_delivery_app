@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'foodapp',
     'cart',
     'search',
+    'payment',
+    'subscription_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,3 +135,11 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if DEBUG:
+    STRIPE_PUBLISHABLE_KEY = 'pk_test_51KzwWzSDsPN3RN8ScaB5dyKCW7kzMhUPTHT3Z9tBWg6AuuYUe3vxva4rdJ3UQa8BlehIqzt1eRfHxv2v0CiHItCF00pIwcUk7U'
+    STRIPE_SECRET_KEY = 'sk_test_51KzwWzSDsPN3RN8Sop2lEfIXkp4gB2P48TcKVBGCfryaLY1KUZ2xcxp5wVqUVOLzX1WE5wd8qNlYjcGKCDxEYLRm00iwsEqNNf'
+# Uncomment these lines if you have a live keys
+# else:
+#     STRIPE_PUBLISHABLE_KEY = 'production_publishable_key'
+#     STRIPE_SECRET_KEY = 'production_secret_key'

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+      <div class="container">
+<!--        <a class="navbar-brand" href=""><span class="text-primary">Res</span>-Tio</a>-->
+
+
+        {% include 'design/searchbox.html' %}
+
+            &emsp;
+            &emsp;
+        <div class="row my_prod_row_class">
+            <div class="mx-auto">
+                <p>
+                    <a href="{{dish.restaurant.get_url}}"><b>{{restaurant}}</b></a>
+                </p>
+            </div>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupport">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Hello {{user.username}}</a>
+            {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'foodapp:allDishRest' %}">Menu</a>
+            </li>
+
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% url 'foodapp:allDishRest' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Restaurants
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'foodapp:allDishRest' %}">All Items</a>
+                  {% for rest in links %}
+                  <a class="dropdown-item" href="{{rest.get_url}}">{{rest.name}}</a>
+                  {% endfor %}
+
+              </div>
+            </li>
+
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="{% url 'foodapp:logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="{% url 'foodapp:loginview' %}">Login / Register</a>
+            </li>
+            {% endif %}
+
+          </ul>
+        </div> <!-- .navbar-collapse -->
+      </div> <!-- .container -->
+    </nav>

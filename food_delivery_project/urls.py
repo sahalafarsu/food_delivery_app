@@ -25,8 +25,8 @@ urlpatterns = [
     path('',include('foodapp.urls')),
     path('cart',include('cart.urls')),
     path('search',include('search.urls')),
-
-
+    path('payment', include('payment.urls')),
+    path('subscription_app', include('subscription_app.urls')),
 
 ]
 if settings.DEBUG:

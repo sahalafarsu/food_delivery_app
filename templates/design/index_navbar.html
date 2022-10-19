@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href=""><span class="text-primary">Res</span>-Tio</a>
+
+        {% include 'design/cart_link.html' %}
+
+
+        {% include 'design/subscriber.html' %}
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupport">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Hello {{user.username}}</a>
+            {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            {% endif %}
+
+            {% include 'design/menu_link.html' %}
+
+            {% include 'design/other_links.html' %}
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="{% url 'foodapp:logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="{% url 'foodapp:loginview' %}">Login / Register</a>
+            </li>
+            {% endif %}
+
+          </ul>
+        </div> <!-- .navbar-collapse -->
+      </div> <!-- .container -->
+    </nav>
+
+

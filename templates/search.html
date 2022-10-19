@@ -1,16 +1,18 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>search</title>
-</head>
-<body>
+{% extends 'design/base.html' %}
 
+{% load static %}
+
+{% block content %}
+
+{% include 'design/menu_navbar.html' %}
 
 
 <div>
-    <p class="text-center my_search">You have searched for: <b>"{{query}}"</b></p>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+            <p class="text-center my_search"><center>You have searched for: <b>"{{query}}"</b></center></p>
+        </nav>
+    </div>
 </div>
 <div class="container">
 <div class="row mx-auto">
@@ -34,5 +36,4 @@
 </div>
 </div>
 
-</body>
-</html>
+{% endblock %}

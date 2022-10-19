@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+
+
+<div class="container mt-5">
+    {% if subscription.status == "active" %}
+    <h4>Your subscription:</h4>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">
+          {{ product.description }}
+        </p>
+      </div>
+      <br>
+      <div class="container">
+        <a href="{% url 'pausesubscription' %}">Pause Subscription</a>
+      </div>
+      <div class="container">
+        <a href="{% url 'resumesubscription' %}">Resume Subscription</a>
+      </div>
+      <br>
+      <div class="container">
+        <a href="{% url 'updateplan' %}">Update Subscription</a>
+      </div>
+    </div>
+    {% endif %}
+</div>
+<div class="container">
+    {% if cancel_at_period_end %}
+    Your membership will run to the end of your billing cycle.
+    {% elif membership %}
+    <form action="{% url 'settings' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Cancel Membership?">
+    </form>
+    {% else %}
+    <a href="{% url 'join' %}">Get a membership</a>
+    {% endif %}
+</div>
+
+
+
 </body>
 </html>

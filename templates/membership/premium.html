@@ -1,0 +1,97 @@
+
+{% extends 'design/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'design/premium_navbar.html' %}
+
+<div class="container mt-5">
+
+
+    {% if user.customer.membership == True %}
+    <h4>Your subscription:</h4>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">
+          {{ product.description }}
+        </p>
+      </div>
+    </div>
+      <br>
+
+
+            {% if user.customer.cancel_at_period_end == True %}
+
+                Your subscription is canceled<br>
+                Your subscription will run to the end of your billing cycle.
+                <br><br>
+                <a href="{% url 'subscription_app:join' %}">Get new subscription</a>
+
+
+            {% elif user.customer.status == 'active' %}
+                <div class="container">
+                    <a href="{% url 'subscription_app:pausesubscription' %}">Pause Subscription</a>
+                </div>
+                <br>
+                <div class="container">
+                    <a href="{% url 'subscription_app:updateplan' %}">Update Subscription</a>
+                </div>
+                <br>
+                <br>
+                <form action="{% url 'subscription_app:settings' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Cancel Membership?">
+                </form>
+
+            {% elif user.customer.status == 'pause' %}
+            <div class="container">
+                <a href="{% url 'subscription_app:resumesubscription' %}">Resume Subscription</a>
+            </div>
+            <br>
+            <div class="container">
+                <a href="{% url 'subscription_app:updateplan' %}">Update Subscription</a>
+            </div>
+            <br>
+            <form action="{% url 'subscription_app:settings' %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Cancel Membership?">
+            </form>
+
+
+            {% else %}
+
+            <div class="container">
+                <a href="{% url 'subscription_app:pausesubscription' %}">Pause Subscription</a>
+            </div>
+            <br>
+            <div class="container">
+                <a href="{% url 'subscription_app:resumesubscription' %}">Resume Subscription</a>
+            </div>
+            <br>
+            <div class="container">
+                <a href="{% url 'subscription_app:updateplan' %}">Update Subscription</a>
+            </div>
+            <br>
+            <br>
+            <form action="{% url 'subscription_app:settings' %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Cancel Membership?">
+            </form>
+
+            {% endif %}
+  {% else %}
+    <a href="{% url 'subscription_app:join' %}">Get a Subscription</a>
+
+  {% endif %}
+
+
+</div>
+
+{% endblock %}
+
+
+
+
+

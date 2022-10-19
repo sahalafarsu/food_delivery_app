@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h3 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your cart</span>
+<!--                <span class="badge badge-secondary badge-pill">1</span>-->
+            </h3>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0"> Premium plan</h6>
+                        <small class="text-muted">{{ membership | title }}</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total</span><br><br>
+                    <strong>RS. {{ final_dollar }}</strong>
+                </li>
+            </ul>
+
+            <div class="text-center pt-3">
+
+                <script src="https://js.stripe.com/v3/"></script>
+
+                <button id="checkout-button" data-secret="{{ session_id }}">
+                    Checkout
+                </button>
+
+                {% load static %}
+                <script type="text/javascript">
+                    var sessionid = "{{session_id}}";
+                </script>
+                <script>
+                    var stripe = Stripe('pk_test_51KzwWzSDsPN3RN8ScaB5dyKCW7kzMhUPTHT3Z9tBWg6AuuYUe3vxva4rdJ3UQa8BlehIqzt1eRfHxv2v0CiHItCF00pIwcUk7U');
+
+                    var checkoutButton = document.getElementById('checkout-button');
+
+                    checkoutButton.addEventListener('click', function () {
+                        stripe.redirectToCheckout({
+                            // Make the id field from the Checkout Session creation API response
+                            // available to this file, so you can provide it as argument here
+                            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                            sessionId: sessionid
+                        }).then(function (result) {
+                            // If `redirectToCheckout` fails due to a browser or network
+                            // error, display the localized error message to your customer
+                            // using `result.error.message`.
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 </body>
 </html>

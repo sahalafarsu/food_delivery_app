@@ -1,6 +1,8 @@
 from . import views
 from django.urls import path
 
+from .views import SpecialListView
+
 app_name = "foodapp"
 
 urlpatterns = [
@@ -14,4 +16,5 @@ urlpatterns = [
     path('registerview', views.RegisterView.as_view(), name='registerview'),
     # path('register',views.register,name='register'),
     path('logout',views.logout,name='logout'),
+    path('specials', SpecialListView.as_view(), name='specials'),
 ]
